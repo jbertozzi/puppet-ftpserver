@@ -1,0 +1,22 @@
+{
+  "name": "jbertozzi-ftpserver",
+  "version": "0.1.0",
+  "author": "Jeremy Bertozzi",
+  "summary": "Simple FTP server configuration",
+  "license": "Apache 2.0",
+  "source": "https://github.com/jbertozzi/puppet-ftpserver",
+  "project_page": "https://github.com/jbertozzi/puppet-ftpserver",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [ "5", "6", "7" ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [ "5", "6", "7" ]
+    }
+  ],
+  "dependencies": [
+  ]
+}
+

@@ -1,0 +1,63 @@
+# standalone mode
+listen=YES
+
+# SSL
+<%- if scope.lookupvar('ftpserver::ssl') != 'none' -%>
+ssl_enable=YES
+rsa_cert_file=<%= scope.lookupvar('ftpserver::cert_file') %>
+ssl_tlsv1=YES
+ssl_sslv2=NO
+ssl_sslv3=NO
+ssl_ciphers=HIGH
+require_ssl_reuse=NO
+force_anon_logins_ssl=YES
+force_local_logins_ssl=YES
+force_anon_data_ssl=YES
+force_local_data_ssl=YES
+<%- if scope.lookupvar('ftpserver::ssl') == 'implicit' -%>
+implicit_ssl=YES
+listen_port=990
+<%- elsif scope.lookupvar('ftpserver::ssl') == 'explicit'-%>
+implicit_ssl=NO
+listen_port=21
+<%- end -%>
+<%- else -%>
+ssl_enable=NO
+<%- end -%>
+
+<%- if scope.lookupvar('ftpserver::mode') == 'passive' -%>
+# passive mode
+connect_from_port_20=NO
+pasv_min_port=<%= scope.lookupvar('ftpserver::pasv_min_port') %>
+pasv_max_port=<%= scope.lookupvar('ftpserver::pasv_max_port') %>
+<%- else -%>
+# active mode
+connect_from_port_20=YES
+<%- end -%>
+
+# log settings
+xferlog_std_format=NO
+xferlog_enable=YES
+#log_ftp_protocol=YES
+
+# users configuration
+<%- if scope.lookupvar('ftpserver::allow_anon') -%>
+anonymous_enable=YES
+allow_anon_ssl=YES
+no_anon_password=YES
+<%- else -%>
+anonymous_enable=NO
+allow_anon_ssl=NO
+no_anon_password=NO
+<%- end -%>
+chroot_local_user=YES
+local_enable=YES
+write_enable=YES
+local_umask=022
+<%- if @operatingsystem =~ /RedHat|CentOS/ and (@lsbmajdistrelease == '7')  -%>
+allow_writeable_chroot=YES
+<%- end -%>
+pam_service_name=vsftpd
+userlist_enable=YES
+tcp_wrappers=YES
+
