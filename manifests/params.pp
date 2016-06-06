@@ -7,7 +7,7 @@ class ftpserver::params {
   $pasv_min_port  = '2121'
   $pasv_max_port  = '2131'
   $ssl            = 'explicit'
-  $cert_file      = "/etc/pki/tls/certs/${fqdn}.pem"
+  $cert_file      = "/etc/pki/tls/certs/${::fqdn}.pem"
   $allow_anon     = false
 
 }

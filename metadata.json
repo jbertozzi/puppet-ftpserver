@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Jeremy Bertozzi",
   "summary": "Simple FTP server configuration",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "source": "https://github.com/jbertozzi/puppet-ftpserver",
   "project_page": "https://github.com/jbertozzi/puppet-ftpserver",
   "operatingsystem_support": [
@@ -17,6 +17,13 @@
     }
   ],
   "dependencies": [
+  ],
+  "tags": ["ftp", "vsftpd"],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">=2.7.20 <5.0.0"
+    }
   ]
 }
 

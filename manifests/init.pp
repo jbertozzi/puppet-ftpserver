@@ -64,12 +64,12 @@ class ftpserver (
 ) inherits ftpserver::params {
 
   package{$package_name:
-    ensure  => "installed",
+    ensure  => 'installed',
   }
 
   service{$service_name:
-    ensure  => "running",
-    enable  => "true",
+    ensure  => 'running',
+    enable  => true,
     require => Package[$package_name],
   }
 
@@ -82,7 +82,7 @@ class ftpserver (
   if ($ssl != 'none'){
     exec {"Generate certificate: ${cert_file}":
       command => "/etc/pki/tls/certs/make-dummy-cert ${cert_file}",
-      creates => "${cert_file}",
+      creates => $cert_file,
       notify  => Service[$service_name],
     }
   }
