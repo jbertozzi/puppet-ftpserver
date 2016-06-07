@@ -24,6 +24,10 @@ Explicit SSL will encrypt both data and command on client demand while
 implicit SSL will start a SSL session right away. These modes are not 
 compatible, and FTP client needs to be set accordingly.
 
+If SSL is enabled ('explicit' or 'implicit'), a self signed certificate is 
+genreated into /etc/pki/tls/certs/${::fqdn}.pem (unless overwritten with 
+'cert_file' parameter). If the file exists, it won't be changed.
+
 ## Examples
 
 FTP server in passive mode with explicit encryption, anonymous not allowed. In 
@@ -37,7 +41,9 @@ class { 'ftpserver':
   mode          => 'passive',
   pasv_min_port => '2121',
   pasv_max_port => '2131',
-  allow_anon    => false
+  allow_anon    => false,
+  cert_file     => '/custom/path/server.pem',
+}
 ```
 
 FTP server in passive mode, SSL set to implicit. Connection first establish a 
@@ -50,6 +56,7 @@ class { 'ftpserver':
   mode          => 'passive',
   pasv_min_port => '2121',
   pasv_max_port => '2131',
+}
 ```
 
 FTP server in active mode, SSL disabled and anonymous user allowed:
